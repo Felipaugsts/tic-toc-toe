@@ -3,6 +3,32 @@
     width: 90vw !important;
   }
 }
+
+@media only screen and (max-width: 800px) {
+  .profile-container {
+    flex-direction: column;
+    justify-content: center !important;
+  }
+  .container-wrapper-user {
+    height: 450px !important;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .about-container {
+    display: none !important;
+  }
+  .user-container {
+    justify-content: center;
+  }
+  .profile-info {
+    text-align: center !important;
+  }
+  .profile-container {
+    width: 90% !important;
+  }
+}
+
 @media only screen and (max-width: 500px) {
   .navbar-inner {
     width: 100vw !important;

@@ -15,7 +15,7 @@
 export default {
   data() {
     return {
-      color: "rgb(205, 205, 205)",
+      color: "rgb(229, 229, 229)",
     };
   },
 
@@ -32,7 +32,7 @@ export default {
       if (window.scrollY > 150) {
         this.color = "transparent";
       } else if (window.scrollY < 100) {
-        this.color = "rgb(205, 205, 205)";
+        this.color = "rgb(229, 229, 229)";
       }
     },
   },
