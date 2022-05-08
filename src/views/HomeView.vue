@@ -41,7 +41,12 @@
         >
           Player 1
         </p>
-        <gameCard @handleClick="handleClick" :turn="turn" />
+        <gameCard
+          @handleClick="changeToNextPlayer"
+          :reset="reset"
+          :turn="turn"
+          @winner="setWinner"
+        />
         <p
           :class="
             turn !== 2
@@ -53,23 +58,60 @@
         </p>
       </div>
     </div>
+    <WinnerCardVue
+      v-if="winnerStatus"
+      @winnerDialog="winnerStatus = false"
+      @resetGame="resetGame"
+      :gameWinner="gameWinner"
+    />
   </div>
 </template>
 
 <script>
 import gameCard from "@/components/GameCard.vue";
+import WinnerCardVue from "@/components/WinnerCard.vue";
 export default {
   components: {
     gameCard,
+    WinnerCardVue,
   },
   data() {
     return {
-      turn: 1,
+      turn: 1, //who will play next round
+      winnerStatus: false, // modal displayed when we have a winner
+      gameStatus: {
+        rounds: 0,
+        player1: 0,
+        player2: 0,
+      }, // game status
     };
   },
   methods: {
-    handleClick(e) {
+    changeToNextPlayer(e) {
       this.turn = e;
+    },
+    setWinner(e) {
+      this.gameStatus.rounds = this.gameStatus.rounds + 1;
+      if (e === 1) {
+        this.gameStatus.player1++;
+        this.gameWinner = {
+          winner: 1,
+          games: this.gameStatus.player1,
+        };
+      } else if (e === 2) {
+        this.gameStatus.player2++;
+        this.gameWinner = {
+          winner: 2,
+          games: this.gameStatus.player2,
+        };
+      }
+      this.winnerStatus = true;
+    },
+
+    resetGame() {
+      (this.gameStatus.rounds = 0),
+        (this.gameStatus.player1 = 0),
+        (this.gameStatus.player2 = 0);
     },
   },
 };
@@ -82,7 +124,7 @@ export default {
   display: flex;
   flex-direction: column;
   background: rgb(245, 243, 243);
-  height: 100vh;
+  height: auto;
 }
 
 /*  USER PROFILE CSS */

@@ -1,5 +1,5 @@
 <template>
-  <div class="game-container">
+  <div class="game-wrapper">
     <div v-for="(option, x) in board" :key="x">
       <div
         class="game-item"
@@ -23,27 +23,17 @@
 </template>
 <script>
 export default {
-  props: ["turn"],
+  props: ["turn", "reset"],
   data() {
     return {
       winner: null,
+
       board: [
         ["", "", ""],
         ["", "", ""],
         ["", "", ""],
       ],
       player: 1,
-      options: [
-        { id: "1" },
-        { id: "2" },
-        { id: "3" },
-        { id: "4" },
-        { id: "5" },
-        { id: "6" },
-        { id: "7" },
-        { id: "8" },
-        { id: "9" },
-      ],
     };
   },
   methods: {
@@ -73,6 +63,7 @@ export default {
 
         if (board[a] && board[a] === board[b] && board[a] === board[c]) {
           this.winner = board[a];
+          this.$emit("winner", this.winner);
         }
       }
       return null;
@@ -82,21 +73,39 @@ export default {
     turn() {
       this.player = this.turn;
     },
+    resetState() {
+      if (this.resetState) {
+        this.winner = null;
+        this.board = [
+          ["", "", ""],
+          ["", "", ""],
+          ["", "", ""],
+        ];
+        this.$store.commit("nextRound", false);
+      }
+    },
+  },
+  computed: {
+    resetState() {
+      return this.$store.getters.resetState;
+    },
   },
 };
 </script>
 
 <style scoped>
-.game-container {
+.game-wrapper {
   height: 500px;
   width: 500px;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 .game-item {
-  width: 150px;
+  width: 160px;
   height: 149px;
-  margin-top: 8px;
+  margin: 2px;
   /* border: 2px solid rgb(158, 158, 158); */
   -webkit-box-shadow: 5px 6px 6px -4px #000000;
   box-shadow: 5px 6px 6px -4px #000000;

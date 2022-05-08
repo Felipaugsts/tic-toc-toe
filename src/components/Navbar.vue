@@ -16,6 +16,7 @@ export default {
   data() {
     return {
       color: "rgb(229, 229, 229)",
+      opacity: 1,
     };
   },
 
@@ -30,9 +31,9 @@ export default {
   methods: {
     onScroll() {
       if (window.scrollY > 150) {
-        this.color = "transparent";
+        this.opacity = 0.4;
       } else if (window.scrollY < 100) {
-        this.color = "rgb(229, 229, 229)";
+        this.opacity = 1;
       }
     },
   },
@@ -43,6 +44,7 @@ export default {
 .navbar {
   position: fixed;
   background-color: v-bind("color");
+  opacity: v-bind("opacity");
   width: 100vw;
   display: flex;
   justify-content: center;
