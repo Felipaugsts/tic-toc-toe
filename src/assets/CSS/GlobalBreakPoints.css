@@ -26,6 +26,11 @@
   .winner-container {
     left: 20% !important;
   }
+  .footer {
+    width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
 }
 
 @media only screen and (max-width: 650px) {
@@ -50,6 +55,9 @@
   }
   .contact {
     display: none;
+  }
+  .footer {
+    justify-content: space-evenly !important;
   }
 }
 

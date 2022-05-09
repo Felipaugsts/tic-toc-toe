@@ -57,19 +57,21 @@
         </p>
       </div>
     </div>
+    <!-- Modal Displayed when we have a winner -->
     <WinnerCardVue
       v-if="winnerStatus"
       @winnerDialog="winnerStatus = false"
       @resetGame="resetGame"
       :gameWinner="gameWinner"
     />
+
     <Footer />
   </div>
 </template>
 
 <script>
-import gameCard from "@/components/GameCard.vue";
-import WinnerCardVue from "@/components/WinnerCard.vue";
+import gameCard from "@/components/Cards/GameCard.vue";
+import WinnerCardVue from "@/components/Dialog/WinnerDialog.vue";
 import Footer from "@/components/Footer.vue";
 
 export default {
