@@ -48,6 +48,9 @@
     left: 5% !important;
     width: 90% !important;
   }
+  .contact {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 500px) {

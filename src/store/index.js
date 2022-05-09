@@ -10,7 +10,6 @@ export default createStore({
   mutations: {
     nextRound(state, status) {
       state.reset = status;
-      console.log("state reset", state.reset);
     },
   },
   actions: {},

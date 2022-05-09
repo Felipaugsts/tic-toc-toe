@@ -43,7 +43,6 @@
         </p>
         <gameCard
           @handleClick="changeToNextPlayer"
-          :reset="reset"
           :turn="turn"
           @winner="setWinner"
         />
@@ -64,17 +63,22 @@
       @resetGame="resetGame"
       :gameWinner="gameWinner"
     />
+    <Footer />
   </div>
 </template>
 
 <script>
 import gameCard from "@/components/GameCard.vue";
 import WinnerCardVue from "@/components/WinnerCard.vue";
+import Footer from "@/components/Footer.vue";
+
 export default {
   components: {
     gameCard,
     WinnerCardVue,
+    Footer,
   },
+
   data() {
     return {
       turn: 1, //who will play next round
@@ -86,10 +90,12 @@ export default {
       }, // game status
     };
   },
+
   methods: {
     changeToNextPlayer(e) {
       this.turn = e;
     },
+
     setWinner(e) {
       this.gameStatus.rounds = this.gameStatus.rounds + 1;
       if (e === 1) {

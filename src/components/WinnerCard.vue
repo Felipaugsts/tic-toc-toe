@@ -4,7 +4,7 @@
       <p class="font-large bold">Player {{ gameWinner.winner }} WON!!!!</p>
       <p class="bold">{{ gameWinner.games }} out of 5</p>
       <button @click="nextRound" class="button">
-        <span class="bold font-medium" v-if="gameWinner.games === 3"
+        <span class="bold font-medium" v-if="gameWinner.games === 5"
           >Reset Game</span
         >
         <span class="bold font-medium" v-else>Next round</span>
@@ -19,7 +19,7 @@ export default {
     nextRound() {
       this.$store.commit("nextRound", true);
       this.$emit("winnerDialog", false);
-      if (this.gameWinner.games === 3) {
+      if (this.gameWinner.games === 5) {
         this.$emit("resetGame");
       }
     },
