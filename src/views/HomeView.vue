@@ -42,9 +42,9 @@
           Player 1
         </p>
         <gameCard
-          @handleClick="changeToNextPlayer"
+          @handleClick="(e) => (turn = e)"
           :turn="turn"
-          @winner="setWinner"
+          @winner="handleRoundWinner"
         />
         <p
           :class="
@@ -60,67 +60,61 @@
     <!-- Modal Displayed when we have a winner -->
     <WinnerCardVue
       v-if="winnerStatus"
-      @winnerDialog="winnerStatus = false"
-      @resetGame="resetGame"
-      :gameWinner="gameWinner"
+      @winnerDialog="disableDialog"
+      :gameWinner="gameStatus"
     />
-
-    <Footer />
   </div>
 </template>
 
 <script>
 import gameCard from "@/components/Cards/GameCard.vue";
 import WinnerCardVue from "@/components/Dialog/WinnerDialog.vue";
-import Footer from "@/components/Footer.vue";
 
 export default {
   components: {
     gameCard,
     WinnerCardVue,
-    Footer,
   },
 
   data() {
     return {
       turn: 1, //who will play next round
       winnerStatus: false, // modal displayed when we have a winner
-      gameStatus: {
-        rounds: 0,
-        player1: 0,
-        player2: 0,
-      }, // game status
+      roundWinner: null,
     };
   },
 
   methods: {
-    changeToNextPlayer(e) {
-      this.turn = e;
-    },
-
-    setWinner(e) {
+    handleRoundWinner(e) {
       this.gameStatus.rounds = this.gameStatus.rounds + 1;
-      if (e === 1) {
-        this.gameStatus.player1++;
-        this.gameWinner = {
-          winner: 1,
-          games: this.gameStatus.player1,
-        };
-      } else if (e === 2) {
-        this.gameStatus.player2++;
-        this.gameWinner = {
-          winner: 2,
-          games: this.gameStatus.player2,
-        };
-      }
+      this.roundWinner = e;
+
+      const status = {
+        rounds: this.gameStatus.rounds + 1,
+        roundWinner: e,
+        player1:
+          e === 1 ? this.gameStatus.player1 + 1 : this.gameStatus.player1,
+        player2:
+          e === 2 ? this.gameStatus.player2 + 1 : this.gameStatus.player2,
+      };
+      this.$store.commit("setStatus", status);
       this.winnerStatus = true;
     },
 
-    resetGame() {
-      (this.gameStatus.rounds = 0),
-        (this.gameStatus.player1 = 0),
-        (this.gameStatus.player2 = 0);
+    disableDialog() {
+      this.winnerStatus = false;
+      if (this.gameStatus.player1 === 3 || this.gameStatus.player2 === 3) {
+        this.$store.dispatch("resetGame");
+      }
     },
+  },
+  computed: {
+    gameStatus() {
+      return this.$store.getters.gameStatus;
+    },
+  },
+  created() {
+    this.$store.dispatch("retrieveGameStatus");
   },
 };
 </script>
