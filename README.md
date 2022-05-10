@@ -2,13 +2,14 @@
 
 ## What was used on this project 
 - [x] Vue CLI 
-- [x] Javascript
 - [x] Vuex Store
+- [x] Javascript
 - [x] LocalStorage 
 - [x] Global and Local CSS
 - [x] Reusable components
 - [x] Responsive
 - [x] Firebase Auth
+- [x] Media Query
 
 ### You can check it out [here](https://tic-toc-toe-745fe.web.app/#/). 
 
