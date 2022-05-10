@@ -1,7 +1,7 @@
 <template>
-  <Navbar />
+  <Navbar v-if="isAuth.auth" />
   <router-view />
-  <Footer />
+  <Footer v-if="isAuth.auth" />
 </template>
 <script>
 import Navbar from "../src/components/Navbar.vue";
@@ -10,6 +10,11 @@ export default {
   components: {
     Navbar,
     Footer,
+  },
+  computed: {
+    isAuth() {
+      return this.$store.getters.isUserAuthenticated;
+    },
   },
 };
 </script>

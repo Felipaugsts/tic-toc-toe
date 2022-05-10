@@ -100,7 +100,7 @@ export default {
         player2:
           e === 2 ? this.gameStatus.player2 + 1 : this.gameStatus.player2,
       };
-      this.$store.commit("setStatus", status);
+      this.$store.commit("setGameStatus", status);
       this.winnerStatus = true;
     },
 

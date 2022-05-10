@@ -24,13 +24,9 @@ export default createStore({
       state.reset = status;
     },
     setGameStatus(state, status) {
-      console.log("status", status);
-      localStorage.setItem("gameStatus", JSON.stringify(status));
-    },
-    setStatus(state, status) {
-      console.log("new status", status);
       if (status) {
         state.gameStatus = status;
+        localStorage.setItem("gameStatus", JSON.stringify(status));
       }
     },
 
@@ -56,7 +52,7 @@ export default createStore({
   actions: {
     retrieveGameStatus({ commit }) {
       var retrievedObject = localStorage.getItem("gameStatus");
-      commit("setStatus", JSON.parse(retrievedObject));
+      commit("setGameStatus", JSON.parse(retrievedObject));
     },
 
     resetGame({ commit }) {
@@ -68,7 +64,6 @@ export default createStore({
         player2: 0,
       };
       commit("setGameStatus", gameStatus);
-      commit("setStatus", gameStatus);
     },
 
     isUserAuthenticated({ commit }) {
@@ -81,5 +76,4 @@ export default createStore({
       }
     },
   },
-  modules: {},
 });

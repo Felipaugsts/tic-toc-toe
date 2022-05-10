@@ -40,6 +40,7 @@ export default {
   height: 100vh;
   background-color: rgb(255, 235, 219);
   position: fixed;
+  top: 0;
   opacity: 0.9;
   display: flex;
   justify-content: center;
