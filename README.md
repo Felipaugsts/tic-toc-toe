@@ -3,6 +3,7 @@
 ## What was used on this project 
 - [x] Vue CLI 
 - [x] Vuex Store
+- [x] Option API
 - [x] Javascript
 - [x] LocalStorage 
 - [x] Global and Local CSS
