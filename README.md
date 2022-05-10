@@ -1,6 +1,6 @@
 ## Tic Toc Toe 
 
-## What I used on this project 
+## What was used on this project 
 - [x] Vue CLI 
 - [x] Javascript
 - [x] Vuex Store
