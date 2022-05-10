@@ -5,11 +5,11 @@
       <div class="user-container">
         <div class="profile-container">
           <div class="image-profile-wrapper">
-            <!-- <img src="" /> -->
-            <p class="font-medium">(Photo Area)</p>
+            <img class="image-profile" v-if="isAuth" :src="isAuth.photoURL" />
+            <p v-if="!isAuth" class="font-medium">(Photo Area)</p>
           </div>
           <div class="profile-info">
-            <p class="font-large">John smith</p>
+            <p class="font-large">{{ isAuth.displayName }}</p>
             <p class="font-medium normal">Age: 30</p>
             <p class="font-medium normal">Location: Porto</p>
             <p class="font-medium normal">Ocupation: Software engineer</p>
@@ -63,17 +63,20 @@
       @winnerDialog="disableDialog"
       :gameWinner="gameStatus"
     />
+    <Auth v-if="!isAuth.auth" />
   </div>
 </template>
 
 <script>
 import gameCard from "@/components/Cards/GameCard.vue";
 import WinnerCardVue from "@/components/Dialog/WinnerDialog.vue";
+import Auth from "@/components/Dialog/AuthDialog.vue";
 
 export default {
   components: {
     gameCard,
     WinnerCardVue,
+    Auth,
   },
 
   data() {
@@ -112,8 +115,12 @@ export default {
     gameStatus() {
       return this.$store.getters.gameStatus;
     },
+    isAuth() {
+      return this.$store.getters.isUserAuthenticated;
+    },
   },
-  created() {
+  async created() {
+    await this.$store.dispatch("isUserAuthenticated");
     this.$store.dispatch("retrieveGameStatus");
   },
 };
@@ -192,5 +199,12 @@ export default {
   border: 0.2px solid rgb(10, 197, 85);
   color: rgb(10, 197, 85);
   padding: 20px;
+}
+.image-profile {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+
+  border-radius: 150px;
 }
 </style>

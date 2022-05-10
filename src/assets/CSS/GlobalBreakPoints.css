@@ -5,6 +5,9 @@
   .game-container-table {
     width: 100% !important;
   }
+  .container-auth {
+    width: 70% !important;
+  }
 }
 
 @media only screen and (max-width: 800px) {
@@ -58,6 +61,15 @@
   }
   .footer {
     justify-content: space-evenly !important;
+  }
+  .container-auth {
+    width: 90% !important;
+  }
+  .auth-font {
+    font-size: 5vw !important;
+  }
+  .image-auth {
+    width: auto !important;
   }
 }
 

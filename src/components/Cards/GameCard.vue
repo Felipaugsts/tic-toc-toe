@@ -37,11 +37,13 @@ export default {
   },
   methods: {
     makeMove(x, y) {
-      if (this.winner != null) return;
-      if (this.board[x][y]) return;
-      this.$emit("handleClick", this.player === 1 ? 2 : 1);
-      this.board[x][y] = this.player;
-      this.CalculateWinner();
+      if (this.isAuth.auth) {
+        if (this.winner != null) return;
+        if (this.board[x][y]) return;
+        this.$emit("handleClick", this.player === 1 ? 2 : 1);
+        this.board[x][y] = this.player;
+        this.CalculateWinner();
+      }
     },
 
     CalculateWinner() {
@@ -87,6 +89,9 @@ export default {
   computed: {
     resetState() {
       return this.$store.getters.resetState;
+    },
+    isAuth() {
+      return this.$store.getters.isUserAuthenticated;
     },
   },
 };

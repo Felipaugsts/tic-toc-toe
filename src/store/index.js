@@ -8,10 +8,16 @@ export default createStore({
       player1: 0,
       player2: 0,
     },
+    user: {
+      auth: null,
+      photoURL: null,
+      displayName: null,
+    },
   },
   getters: {
     resetState: (state) => state.reset,
     gameStatus: (state) => state.gameStatus,
+    isUserAuthenticated: (state) => state.user,
   },
   mutations: {
     nextRound(state, status) {
@@ -26,6 +32,25 @@ export default createStore({
       if (status) {
         state.gameStatus = status;
       }
+    },
+
+    SET_USER(state, user) {
+      console.log("user", user);
+      state.user.displayName = user.displayName;
+      state.user.photoURL = user.photoURL;
+      state.user.auth = true;
+
+      sessionStorage.setItem("user", JSON.stringify(state.user));
+    },
+
+    CLEAR_USER(state) {
+      state.user = {
+        auth: false,
+        photoURL: null,
+        nadisplayNameme: null,
+      };
+      localStorage.clear();
+      sessionStorage.clear();
     },
   },
   actions: {
@@ -44,6 +69,16 @@ export default createStore({
       };
       commit("setGameStatus", gameStatus);
       commit("setStatus", gameStatus);
+    },
+
+    isUserAuthenticated({ commit }) {
+      var user = sessionStorage.getItem("user");
+
+      if (user) {
+        commit("SET_USER", JSON.parse(user));
+      } else {
+        commit("CLEAR_USER");
+      }
     },
   },
   modules: {},
