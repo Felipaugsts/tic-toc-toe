@@ -1,30 +1,23 @@
-# frontend
+## Tic Toc Toe 
 
-## Project setup
-```
-npm install
-```
+## What I used on this project 
+- [x] Vue CLI 
+- [x] Javascript
+- [x] Vuex Store
+- [x] LocalStorage 
+- [x] Global and Local CSS
+- [x] Reusable components
+- [x] Responsive
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Review 
 
-### Compiles and minifies for production
-```
-npm run build
-```
+![Screen-Recording-2022-05-09-at-2](https://user-images.githubusercontent.com/60064602/167522680-32774e12-ef1e-4b1b-885c-685910902fea.gif)
 
-### Run your unit tests
-```
-npm run test:unit
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
+![Screen-Recording-2022-05-09-at-2 (1)](https://user-images.githubusercontent.com/60064602/167522781-43112869-dd88-476b-bda2-99479f5d0736.gif)
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-# tic-toc-toe
+## Usage 
+
+- npm install 
+
+- npm run serve
